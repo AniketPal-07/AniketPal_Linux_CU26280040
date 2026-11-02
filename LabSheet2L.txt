@@ -1,0 +1,416 @@
+#Q1
+touch notes.txt
+ls -l notes.txt
+------------------------------------------------
+
+
+
+#Q2
+chmod 644 notes.txt
+ls -l notes.txt
+------------------------------------------------
+
+
+
+#Q3
+chmod 600 notes.txt
+ls -l notes.txt
+------------------------------------------------
+
+
+
+#Q4
+touch script.sh
+chmod u+x script.sh
+ls -l script.sh
+------------------------------------------------
+
+
+
+#Q5
+whoami
+ls -l notes.txt
+------------------------------------------------
+
+
+
+#Q6
+ps
+# Count the process rows shown for the current terminal session.
+# The exact number depends on the current shell/environment.
+------------------------------------------------
+
+
+
+#Q7
+ps aux
+ps aux | tail -n +2 | wc -l
+------------------------------------------------
+
+
+
+#Q8
+sleep 60 &
+jobs
+------------------------------------------------
+
+
+
+#Q9
+sleep 60 &
+jobs -l
+kill <PID>
+# Replace <PID> with the PID shown by jobs -l.
+------------------------------------------------
+
+
+
+#Q10
+# Ubuntu/Debian:
+apt search '^tree$'
+# Fedora/RHEL:
+dnf search tree
+------------------------------------------------
+
+
+
+#Q11
+umask
+#Q12
+chmod g-w document.txt
+ls -l document.txt
+------------------------------------------------
+
+
+
+#Q13
+fg %1
+------------------------------------------------
+
+
+
+#Q14
+bg %1
+------------------------------------------------
+
+
+
+#Q15
+uname -a
+------------------------------------------------
+
+
+
+#Q16
+ps -u "$USER" 
+------------------------------------------------
+
+
+
+#Q17
+sleep 60 &
+pkill sleep
+------------------------------------------------
+
+
+
+#Q18
+sudo apt update
+------------------------------------------------
+
+
+
+#Q19
+# Ubuntu/Debian:
+apt list --installed
+# Fedora/RHEL:
+dnf list installed
+------------------------------------------------
+
+
+
+#Q20
+sudo chown "$USER" script.sh
+ls -l script.sh
+------------------------------------------------
+
+
+
+#Q21
+chmod 750 script.sh
+# Owner=rwx, group=r-x, others=---
+------------------------------------------------
+
+
+
+#Q22
+chmod 700 file
+# Owner=rwx, group=---, others=---
+
+chmod 007 file
+# Owner=---, group=---, others=rwx
+------------------------------------------------
+
+
+
+#Q23
+sudo chown student:student file
+------------------------------------------------
+
+
+
+#Q24
+top
+# Press P to sort by CPU utilization.
+# Press q to exit.
+------------------------------------------------
+
+
+
+#Q25
+sleep 100 &
+sleep 200 &
+jobs
+fg %1
+------------------------------------------------
+
+
+
+#Q26
+pkill sleep
+# Safe only when all matching sleep processes are test processes.
+------------------------------------------------
+
+
+
+#Q27
+# Ubuntu/Debian:
+sudo apt update
+sudo apt install tree
+tree ~
+
+# Fedora/RHEL:
+sudo dnf install tree
+tree ~
+------------------------------------------------
+
+
+
+#Q28
+# Ubuntu/Debian:
+sudo apt remove tree
+apt list --installed 2>/dev/null | grep '^tree/'
+
+# Fedora/RHEL:
+sudo dnf remove tree
+dnf list installed | grep '^tree'
+------------------------------------------------
+
+
+
+#Q29
+umask
+touch test_mask.txt
+ls -l test_mask.txt
+# Typical regular-file base permissions are 666; umask removes permissions.
+# Example: umask 022 normally gives 644.
+------------------------------------------------
+
+
+
+#Q30
+ps aux | grep "$USER"
+# The grep command itself may also appear.
+------------------------------------------------
+
+
+
+#Q31
+sudo chgrp devteam project_dir
+ls -ld project_dir
+------------------------------------------------
+
+
+
+#Q32
+nice -n 10 sleep 300 &
+ps -o pid,ni,comm -C sleep
+# NI shows the nice value; higher nice generally means lower priority.
+------------------------------------------------
+
+
+
+#Q33
+ps -ef | grep sleep
+renice 10 -p <PID>
+ps -o pid,ni,comm -p <PID>
+------------------------------------------------
+
+
+
+#Q34
+# Ubuntu/Debian:
+sudo apt update
+sudo apt install apache2
+systemctl status apache2
+
+# Nginx alternative:
+sudo apt install nginx
+systemctl status nginx
+
+# Fedora/RHEL:
+sudo dnf install httpd
+systemctl status httpd
+------------------------------------------------
+
+
+
+#Q35
+# apt relies on local repository/package metadata.
+# On a fresh or outdated system it may be missing or stale.
+sudo apt update
+sudo apt install <package>
+------------------------------------------------
+
+
+
+#Q36
+#!/bin/bash
+echo "Linux administration lab"
+
+chmod +x script.sh
+./script.sh
+
+# A valid shebang identifies the interpreter used to execute the script.
+# A missing/invalid shebang can cause ./script.sh to fail.
+------------------------------------------------
+
+
+
+#Q37
+# Symbolic:
+chmod u=rw,g=r,o= shared.txt
+
+# Numeric:
+chmod 640 shared.txt
+------------------------------------------------
+
+
+
+#Q38
+nice -n 15 sleep 300 &
+top
+
+# Find the process and inspect its NI value.
+# Higher nice value means lower CPU scheduling priority.
+------------------------------------------------
+
+
+
+#Q39
+kill 1234
+# If graceful termination fails:
+kill -9 1234
+
+# SIGKILL is a last resort because it cannot be caught or handled,
+# so cleanup code may not run.
+------------------------------------------------
+
+
+
+#Q40
+ps aux --sort=-%cpu | head -5
+------------------------------------------------
+
+
+
+#Q41
+find . -type f -name "*.sh" -exec chmod +x {} +
+------------------------------------------------
+
+
+
+#Q42
+# chmod 777 gives rwx to owner, group, and others.
+# On sensitive production configuration files this can permit
+# unauthorized modification/execution, causing tampering or compromise.
+# Use least privilege instead.
+------------------------------------------------
+
+
+
+#Q43
+# Debian/Ubuntu:
+dpkg -L tree
+
+# Fedora/RHEL:
+rpm -ql tree
+------------------------------------------------
+
+
+
+#Q44
+# SIGTERM (15): graceful termination request; applications can handle
+# it and clean up resources.
+# SIGKILL (9): immediate forced termination; cannot be caught/handled.
+# SIGTERM should normally be tried first.
+------------------------------------------------
+
+
+
+#Q45
+touch file1.txt file2.txt
+sudo chown user1 file1.txt
+sudo chown user2 file2.txt
+
+find . -type f -user user1 -print
+------------------------------------------------
+
+
+
+#Q46
+sudo chmod u+s custom_tool
+# Numeric equivalent:
+sudo chmod 4755 custom_tool
+
+# SUID makes an executable run with the effective user ID of its owner,
+# which can grant elevated privileges.
+------------------------------------------------
+
+
+
+#Q47
+sudo chmod 2775 /shared_dir
+# 2 = SGID; 775 = rwxrwxr-x
+# New files/directories inherit the shared directory's group ownership.
+------------------------------------------------
+
+
+
+#Q48
+sudo chmod o+t /public_tmp
+# Or:
+sudo chmod 1777 /public_tmp
+# Sticky bit restricts deletion/renaming of other users' files in a
+# shared writable directory.
+------------------------------------------------
+
+
+
+#Q49
+sleep 300
+# Press Ctrl+Z to suspend it.
+jobs
+bg %1
+fg %1
+------------------------------------------------
+
+
+
+#Q50
+pid=$(ps -eo pid,comm,%mem --sort=-%mem | sed -n '2p' | awk '{print $1}')
+ps -p "$pid" -o pid,ppid,user,%mem,%cpu,comm,args > top_memory.log
+kill -TERM "$pid"
+
+# Logs PID and details of the highest-memory process, then requests
+# graceful termination with SIGTERM.
